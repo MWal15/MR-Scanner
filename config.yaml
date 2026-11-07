@@ -1,0 +1,30 @@
+# All thresholds live here. Code must not hardcode them.
+indicator:
+  ema_length: 21
+  atr_length: 14
+  atr_mult: 2.0
+  overbought: 1.4
+  oversold: -1.4
+  stretch_high: 1.4     # Pine bgcolor uses 1.4 high ...
+  stretch_low: -1.5     # ... and -1.5 low (asymmetric in the original; kept on purpose)
+
+# "cross"  = candidate only on the bar the threshold is crossed (matches the Pine alerts)
+# "state"  = candidate on every bar while stretched
+trigger_mode: cross
+timeframe: 1d
+universe_file: universe.txt
+
+# Option contract filters. Placeholders: tune to your strategy.
+# Oversold underlying -> look at calls; overbought -> look at puts.
+options:
+  dte_min: 21
+  dte_max: 60
+  delta_min: 0.30
+  delta_max: 0.50
+  min_open_interest: 500
+  min_volume: 50
+  max_bid_ask_spread_pct: 10
+  min_iv_rank: null     # optional; needs IV history from the data provider
+
+data_provider: TODO     # polygon | tradier | alpaca | ibkr | schwab
+notify: TODO            # discord | telegram | email | csv
